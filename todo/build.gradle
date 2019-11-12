@@ -1,0 +1,52 @@
+plugins {
+    id 'org.jetbrains.kotlin.js' version '1.3.50'
+}
+
+def kotlinVersion = "1.3.50"
+def suffix = "-pre.83-kotlin-"
+def kotlinReactVersion = "16.9.0" + suffix + kotlinVersion
+def kotlinReactRouterVersion = "4.3.1" + suffix + kotlinVersion
+def kotlinReactReduxVersion = "5.0.7" + suffix + kotlinVersion
+def kotlinReduxVersion = "4.0.0" + suffix + kotlinVersion
+def kotlinStyledVersion = "1.0.0" + suffix + kotlinVersion
+
+group 'ru.altmanea'
+version '0.1'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://kotlin.bintray.com/kotlin-js-wrappers" }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+}
+
+kotlin {
+    target {
+        browser()
+    }
+
+    sourceSets["main"].dependencies {
+        implementation(kotlin("stdlib-js"))
+        implementation("org.jetbrains:kotlin-react:$kotlinReactVersion")
+        implementation("org.jetbrains:kotlin-react-dom:$kotlinReactVersion")
+        implementation("org.jetbrains:kotlin-react-router-dom:$kotlinReactRouterVersion")
+        implementation("org.jetbrains:kotlin-react-redux:$kotlinReactReduxVersion")
+        implementation("org.jetbrains:kotlin-redux:$kotlinReduxVersion")
+        implementation("org.jetbrains:kotlin-styled:$kotlinStyledVersion")
+        implementation(npm("react", "16.9.0"))
+        implementation(npm("react-dom", "16.9.0"))
+        implementation(npm("core-js", "3.2.1"))
+        implementation(npm("react-router-dom", "4.3.1"))
+        implementation(npm("redux", "4.0.0"))
+        implementation(npm("react-redux", "7.1.1"))
+        implementation(npm("inline-style-prefixer", "5.1.0"))
+        implementation(npm("styled-components", "4.4.0"))
+        implementation(npm("cross-fetch", "3.0.4"))
+        implementation(npm("redux-thunk", "2.3.0"))
+        implementation(npm("redux-logger", "3.0.6"))
+    }
+}
+
+compileKotlinJs {
+    kotlinOptions.moduleKind = 'commonjs'
+}
