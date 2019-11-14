@@ -22,7 +22,9 @@ repositories {
 
 kotlin {
     target {
-        browser()
+        browser{
+
+        }
     }
 
     sourceSets["main"].dependencies {
@@ -49,4 +51,21 @@ kotlin {
 
 compileKotlinJs {
     kotlinOptions.moduleKind = 'commonjs'
+    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = "always"
+}
+
+browserRun {
+    boolean open = false; // open browser
+    int port = 8001
+    devServer = devServer.copy(
+            devServer.inline,
+            devServer.lazy,
+            devServer.noInfo,
+            open,
+            devServer.overlay,
+            port,
+            devServer.proxy,
+            devServer.contentBase,
+    )
 }

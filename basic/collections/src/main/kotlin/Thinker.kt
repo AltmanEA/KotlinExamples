@@ -108,6 +108,4 @@ class Thinker(private val board: Board, private val dict: Dict) {
             )
             sortByDescending { it.word.length }
         }
-
-    val x = TreeMap<Int, Int>()
-}
+ }
