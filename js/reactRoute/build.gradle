@@ -1,0 +1,44 @@
+plugins {
+    id 'org.jetbrains.kotlin.js' version '1.3.50'
+}
+
+def kotlinVersion = "1.3.50"
+def suffix = "-pre.83-kotlin-"
+def kotlinReactVersion = "16.9.0" + suffix + kotlinVersion
+def kotlinReactRouterVersion = "4.3.1" + suffix + kotlinVersion
+
+group 'ru.altmanea.examples'
+version '0.1'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url "https://kotlin.bintray.com/kotlin-js-wrappers" }
+    maven { url "https://kotlin.bintray.com/kotlinx" }
+}
+
+dependencies {
+    testImplementation "org.jetbrains.kotlin:kotlin-test-js:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlinVersion"
+    implementation "org.jetbrains:kotlin-react:$kotlinReactVersion"
+    implementation "org.jetbrains:kotlin-react-dom:$kotlinReactVersion"
+    implementation "org.jetbrains:kotlin-react-router-dom:$kotlinReactRouterVersion"
+}
+
+kotlin {
+    target {
+        browser()
+    }
+    sourceSets["main"].dependencies {
+        implementation(npm("react", "16.9.0"))
+        implementation(npm("react-dom", "16.9.0"))
+        implementation(npm("core-js", "3.2.1"))
+        implementation(npm("react-router-dom", "4.3.1"))
+    }
+}
+
+compileKotlinJs{
+    kotlinOptions.moduleKind = 'commonjs'
+    kotlinOptions.sourceMap = true
+    kotlinOptions.sourceMapEmbedSources = "always"
+}
