@@ -14,7 +14,8 @@ fun main() {
     fetch("https://www.reddit.com/r/reactjs.json")
         .then {
             it.text()
-        }.then {
+        }
+        .then {
             val reddit = json.parse(
                 Reddit.serializer(), it
             )
