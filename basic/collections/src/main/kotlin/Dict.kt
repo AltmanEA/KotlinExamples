@@ -12,7 +12,7 @@ class DictImp : Dict {
     val words = Dict::class
         .java.getResource("words.txt")
         .readText()
-        .split("\n")
+        .split("\r\n")
         .toTypedArray()
         .apply {
             forEach {
